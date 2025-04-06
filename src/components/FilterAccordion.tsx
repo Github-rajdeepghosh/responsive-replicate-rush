@@ -16,18 +16,18 @@ const FilterAccordion: React.FC<FilterAccordionProps> = ({
   const [isOpen, setIsOpen] = useState(title === "Date");
 
   return (
-    <div className="border-b border-gray-200">
+    <div className="filter-accordion">
       <div 
-        className="flex items-center justify-between py-3 cursor-pointer"
+        className="filter-header"
         onClick={() => setIsOpen(!isOpen)}
       >
-        <div className="flex items-center">
+        <div className="filter-title">
           {isOpen ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
-          <span className="ml-2 text-gray-700 font-medium">{title}</span>
+          <span>{title}</span>
         </div>
         {onClear && (
           <button 
-            className="text-gray-500 text-sm hover:text-gray-700"
+            className="filter-clear"
             onClick={(e) => {
               e.stopPropagation();
               onClear();
@@ -37,7 +37,7 @@ const FilterAccordion: React.FC<FilterAccordionProps> = ({
           </button>
         )}
       </div>
-      <div className={`pb-3 ${isOpen ? 'block' : 'hidden'}`}>
+      <div className={`filter-content ${isOpen ? '' : 'hidden'}`}>
         {children}
       </div>
     </div>

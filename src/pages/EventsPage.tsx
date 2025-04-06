@@ -5,12 +5,9 @@ import EventCategory from "@/components/EventCategory";
 import EventCard from "@/components/EventCard";
 import FilterAccordion from "@/components/FilterAccordion";
 import DateFilter from "@/components/DateFilter";
-import { Button } from "@/components/ui/button";
-import { useIsMobile } from "@/hooks/use-mobile";
 
 const EventsPage = () => {
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
-  const isMobile = useIsMobile();
 
   const eventCategories = [
     { name: "Comedy Shows", isActive: true },
@@ -67,90 +64,82 @@ const EventsPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div>
       <Navbar />
       
-      <main className="container mx-auto px-4 py-6">
-        <div className="flex flex-col lg:flex-row gap-6">
-          {/* Filters Section */}
-          <div className="lg:w-1/4">
-            <div className="bg-white rounded-lg shadow-sm p-4">
-              <h2 className="text-xl font-bold mb-4">Filters</h2>
+      <div className="container main-content">
+        {/* Filters Section */}
+        <div className="filters-section">
+          <div className="filters-card">
+            <h2 className="filters-title">Filters</h2>
+            
+            <div>
+              <FilterAccordion 
+                title="Date" 
+                onClear={selectedDate ? handleClearDateFilter : undefined}
+              >
+                <DateFilter 
+                  selectedDate={selectedDate} 
+                  onSelectDate={setSelectedDate} 
+                />
+              </FilterAccordion>
               
-              <div className="space-y-3">
-                <FilterAccordion 
-                  title="Date" 
-                  onClear={selectedDate ? handleClearDateFilter : undefined}
-                >
-                  <DateFilter 
-                    selectedDate={selectedDate} 
-                    onSelectDate={setSelectedDate} 
-                  />
-                </FilterAccordion>
-                
-                <FilterAccordion title="Languages" onClear={() => {}}>
-                  {/* Languages filter content */}
-                  <div className="text-sm text-gray-500">
-                    Language filters would go here
-                  </div>
-                </FilterAccordion>
-                
-                <FilterAccordion title="Categories" onClear={() => {}}>
-                  {/* Categories filter content */}
-                  <div className="text-sm text-gray-500">
-                    Category filters would go here
-                  </div>
-                </FilterAccordion>
-                
-                <FilterAccordion title="More Filters" onClear={() => {}}>
-                  {/* More filters content */}
-                  <div className="text-sm text-gray-500">
-                    Additional filters would go here
-                  </div>
-                </FilterAccordion>
-                
-                <FilterAccordion title="Price" onClear={() => {}}>
-                  {/* Price filter content */}
-                  <div className="text-sm text-gray-500">
-                    Price range filters would go here
-                  </div>
-                </FilterAccordion>
-              </div>
+              <FilterAccordion title="Languages" onClear={() => {}}>
+                <div>
+                  Language filters would go here
+                </div>
+              </FilterAccordion>
               
-              <div className="mt-4">
-                <Button className="w-full border border-rose-500 bg-white hover:bg-rose-50 text-rose-500">
-                  Browse by Venues
-                </Button>
-              </div>
-            </div>
-          </div>
-          
-          {/* Events Content */}
-          <div className="lg:w-3/4">
-            <div className="mb-6">
-              <h1 className="text-2xl font-bold mb-4">Events In Bhubaneswar</h1>
+              <FilterAccordion title="Categories" onClear={() => {}}>
+                <div>
+                  Category filters would go here
+                </div>
+              </FilterAccordion>
               
-              {/* Categories Bar */}
-              <div className="flex gap-2 overflow-x-auto pb-2 -mx-1 px-1">
-                {eventCategories.map((category, index) => (
-                  <EventCategory 
-                    key={index}
-                    name={category.name} 
-                    isActive={category.isActive} 
-                  />
-                ))}
-              </div>
+              <FilterAccordion title="More Filters" onClear={() => {}}>
+                <div>
+                  Additional filters would go here
+                </div>
+              </FilterAccordion>
+              
+              <FilterAccordion title="Price" onClear={() => {}}>
+                <div>
+                  Price range filters would go here
+                </div>
+              </FilterAccordion>
             </div>
             
-            {/* Event Cards Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-              {events.map((event) => (
-                <EventCard key={event.id} {...event} />
+            <button className="browse-venues-btn">
+              Browse by Venues
+            </button>
+          </div>
+        </div>
+        
+        {/* Events Content */}
+        <div className="events-section">
+          <div>
+            <h1 className="events-title">Events In Bhubaneswar</h1>
+            
+            {/* Categories Bar */}
+            <div className="event-categories">
+              {eventCategories.map((category, index) => (
+                <EventCategory 
+                  key={index}
+                  name={category.name} 
+                  isActive={category.isActive} 
+                />
               ))}
             </div>
           </div>
+          
+          {/* Event Cards Grid */}
+          <div className="events-grid">
+            {events.map((event) => (
+              <EventCard key={event.id} {...event} />
+            ))}
+          </div>
         </div>
-      </main>
+      </div>
     </div>
   );
 };
