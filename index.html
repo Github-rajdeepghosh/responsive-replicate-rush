@@ -4,24 +4,234 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>responsive-replicate-rush</title>
-    <meta name="description" content="Lovable Generated Project" />
+    <title>BookMyShow Clone</title>
+    <meta name="description" content="BookMyShow Clone" />
     <meta name="author" content="Lovable" />
 
-    <meta property="og:title" content="Lovable Generated Project" />
-    <meta property="og:description" content="Lovable Generated Project" />
+    <meta property="og:title" content="BookMyShow Clone" />
+    <meta property="og:description" content="BookMyShow Clone" />
     <meta property="og:type" content="website" />
     <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@lovable_dev" />
     <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+    
+    <link rel="stylesheet" href="./styles/main.css">
+    <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS VERY COMMENT! -->
+    <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
   </head>
 
   <body>
-    <div id="root"></div>
-    <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS VERY COMMENT! -->
-    <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
-    <script type="module" src="/src/main.jsx"></script>
+    <header class="header">
+      <!-- Top Navigation Bar -->
+      <div class="container top-nav">
+        <!-- Logo -->
+        <div class="logo">
+          <a href="/">
+            <img 
+              src="/lovable-uploads/000c6802-9e83-42c6-b866-b442dbcca2e9.png" 
+              alt="BookMyShow" 
+            />
+          </a>
+        </div>
+
+        <!-- Search Bar - Hide on Mobile -->
+        <div class="search-container">
+          <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input
+            type="search"
+            placeholder="Search for Movies, Events, Plays, Sports and Activities"
+            class="search-input"
+          />
+        </div>
+
+        <!-- City Selector and Sign In -->
+        <div class="user-actions">
+          <div class="city-selector">
+            <span>Bhubaneswar</span>
+            <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor">
+              <path
+                fill-rule="evenodd"
+                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          </div>
+          <button class="sign-in-btn">Sign in</button>
+          <button class="menu-btn">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Category Navigation -->
+      <nav class="main-nav">
+        <div class="container">
+          <ul>
+            <li><a href="/movies">Movies</a></li>
+            <li><a href="/stream">Stream</a></li>
+            <li><a href="/events" class="active">Events</a></li>
+            <li><a href="/plays">Plays</a></li>
+            <li><a href="/sports">Sports</a></li>
+            <li><a href="/activities">Activities</a></li>
+          </ul>
+        </div>
+      </nav>
+
+      <!-- Secondary Navigation -->
+      <div class="secondary-nav">
+        <div class="container">
+          <ul>
+            <li><a href="/list-your-show">ListYourShow</a></li>
+            <li><a href="/corporates">Corporates</a></li>
+            <li><a href="/offers">Offers</a></li>
+            <li><a href="/gift-cards">Gift Cards</a></li>
+          </ul>
+        </div>
+      </div>
+    </header>
+
+    <div class="container main-content">
+      <!-- Filters Section -->
+      <div class="filters-section">
+        <div class="filters-card">
+          <h2 class="filters-title">Filters</h2>
+          
+          <div>
+            <!-- Date Filter Accordion -->
+            <div class="filter-accordion">
+              <div class="filter-header" data-accordion="date">
+                <div class="filter-title">
+                  <svg id="date-chevron" class="chevron-down" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="m6 9 6 6 6-6"/>
+                  </svg>
+                  <span>Date</span>
+                </div>
+                <button class="filter-clear" id="date-clear">Clear</button>
+              </div>
+              <div class="filter-content" id="date-content">
+                <div class="date-options">
+                  <button class="date-btn" data-date="today">Today</button>
+                  <button class="date-btn" data-date="tomorrow">Tomorrow</button>
+                  <button class="date-btn" data-date="weekend">This Weekend</button>
+                </div>
+                <div class="date-range">
+                  <input type="checkbox" id="date-range" class="checkbox" />
+                  <label for="date-range" class="checkbox-label">Date Range</label>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Languages Filter Accordion -->
+            <div class="filter-accordion">
+              <div class="filter-header" data-accordion="languages">
+                <div class="filter-title">
+                  <svg class="chevron-down" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="m6 9 6 6 6-6"/>
+                  </svg>
+                  <span>Languages</span>
+                </div>
+                <button class="filter-clear">Clear</button>
+              </div>
+              <div class="filter-content hidden" id="languages-content">
+                <div>
+                  Language filters would go here
+                </div>
+              </div>
+            </div>
+            
+            <!-- Categories Filter Accordion -->
+            <div class="filter-accordion">
+              <div class="filter-header" data-accordion="categories">
+                <div class="filter-title">
+                  <svg class="chevron-down" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="m6 9 6 6 6-6"/>
+                  </svg>
+                  <span>Categories</span>
+                </div>
+                <button class="filter-clear">Clear</button>
+              </div>
+              <div class="filter-content hidden" id="categories-content">
+                <div>
+                  Category filters would go here
+                </div>
+              </div>
+            </div>
+            
+            <!-- More Filters Accordion -->
+            <div class="filter-accordion">
+              <div class="filter-header" data-accordion="more-filters">
+                <div class="filter-title">
+                  <svg class="chevron-down" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="m6 9 6 6 6-6"/>
+                  </svg>
+                  <span>More Filters</span>
+                </div>
+                <button class="filter-clear">Clear</button>
+              </div>
+              <div class="filter-content hidden" id="more-filters-content">
+                <div>
+                  Additional filters would go here
+                </div>
+              </div>
+            </div>
+            
+            <!-- Price Filter Accordion -->
+            <div class="filter-accordion">
+              <div class="filter-header" data-accordion="price">
+                <div class="filter-title">
+                  <svg class="chevron-down" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="m6 9 6 6 6-6"/>
+                  </svg>
+                  <span>Price</span>
+                </div>
+                <button class="filter-clear">Clear</button>
+              </div>
+              <div class="filter-content hidden" id="price-content">
+                <div>
+                  Price range filters would go here
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <button class="browse-venues-btn">
+            Browse by Venues
+          </button>
+        </div>
+      </div>
+      
+      <!-- Events Content -->
+      <div class="events-section">
+        <div>
+          <h1 class="events-title">Events In Bhubaneswar</h1>
+          
+          <!-- Categories Bar -->
+          <div class="event-categories">
+            <button class="category-btn active">Comedy Shows</button>
+            <button class="category-btn">Music Shows</button>
+            <button class="category-btn">Performances</button>
+            <button class="category-btn">Workshops</button>
+            <button class="category-btn">Kids</button>
+            <button class="category-btn">Exhibitions</button>
+          </div>
+        </div>
+        
+        <!-- Event Cards Grid -->
+        <div class="events-grid" id="events-container">
+          <!-- Event cards will be added here via JavaScript -->
+        </div>
+      </div>
+    </div>
+
+    <script src="./js/main.js"></script>
   </body>
 </html>
